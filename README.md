@@ -73,6 +73,8 @@ DSF.Finance prioritizes safety with a comprehensive risk assessment, covering sm
 4. **Discord:** [https://discord.gg/8jyTgJ23kw](https://discord.gg/8jyTgJ23kw)
 5. **Twitter:** [https://twitter.com/DsfFinance](https://twitter.com/DsfFinance)
 6. **Telegram:** [https://t.me/DSF_Finance](https://t.me/DSF_Finance)
-7. **Email:** [godefi@dsf.finance](mailto:godefi@dsf.finance)
+7. **Instagram:** [https://www.instagram.com/dsf.finance/](https://www.instagram.com/dsf.finance/)
+8. **Linkedin:** [https://www.linkedin.com/company/dsffinance](https://www.linkedin.com/company/dsffinance)
+9. **Email:** [godefi@dsf.finance](mailto:godefi@dsf.finance)
 
 

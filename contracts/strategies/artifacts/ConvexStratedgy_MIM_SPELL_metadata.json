@@ -1,0 +1,970 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "contract IERC20Metadata[3]",
+								"name": "tokens",
+								"type": "address[3]"
+							},
+							{
+								"internalType": "contract IERC20Metadata",
+								"name": "crv",
+								"type": "address"
+							},
+							{
+								"internalType": "contract IConvexMinter",
+								"name": "cvx",
+								"type": "address"
+							},
+							{
+								"internalType": "contract IUniswapRouter",
+								"name": "router",
+								"type": "address"
+							},
+							{
+								"internalType": "contract IConvexBooster",
+								"name": "booster",
+								"type": "address"
+							},
+							{
+								"internalType": "address[]",
+								"name": "cvxToUsdtPath",
+								"type": "address[]"
+							},
+							{
+								"internalType": "address[]",
+								"name": "crvToUsdtPath",
+								"type": "address[]"
+							}
+						],
+						"internalType": "struct CurveConvexStratBase.Config",
+						"name": "config",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "cvxBalance",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "crvBalance",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "extraBalance",
+						"type": "uint256"
+					}
+				],
+				"name": "SoldRewards",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "CURVE_3POOL_LP_TOKEN_ID",
+				"outputs": [
+					{
+						"internalType": "uint128",
+						"name": "",
+						"type": "uint128"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "CURVE_3POOL_LP_TOKEN_ID_INT",
+				"outputs": [
+					{
+						"internalType": "int128",
+						"name": "",
+						"type": "int128"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "CURVE_PRICE_DENOMINATOR",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "DEPOSIT_DENOMINATOR",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "DSF",
+				"outputs": [
+					{
+						"internalType": "contract IDSF",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "DSF_DAI_TOKEN_ID",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "DSF_EXTRA_TOKEN_ID",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "DSF_USDC_TOKEN_ID",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "DSF_USDT_TOKEN_ID",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "UNISWAP_USD_MULTIPLIER",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "autoCompound",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256[3]",
+						"name": "tokenAmounts",
+						"type": "uint256[3]"
+					},
+					{
+						"internalType": "bool",
+						"name": "isDeposit",
+						"type": "bool"
+					}
+				],
+				"name": "calcSharesAmount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "sharesAmount",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "userRatioOfCrvLps",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint128",
+						"name": "tokenIndex",
+						"type": "uint128"
+					}
+				],
+				"name": "calcWithdrawOneCoin",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenAmount",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_feeDistributor",
+						"type": "address"
+					}
+				],
+				"name": "changeFeeDistributor",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "claimManagementFees",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "config",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "contract IERC20Metadata[3]",
+								"name": "tokens",
+								"type": "address[3]"
+							},
+							{
+								"internalType": "contract IERC20Metadata",
+								"name": "crv",
+								"type": "address"
+							},
+							{
+								"internalType": "contract IConvexMinter",
+								"name": "cvx",
+								"type": "address"
+							},
+							{
+								"internalType": "contract IUniswapRouter",
+								"name": "router",
+								"type": "address"
+							},
+							{
+								"internalType": "contract IConvexBooster",
+								"name": "booster",
+								"type": "address"
+							},
+							{
+								"internalType": "address[]",
+								"name": "cvxToUsdtPath",
+								"type": "address[]"
+							},
+							{
+								"internalType": "address[]",
+								"name": "crvToUsdtPath",
+								"type": "address[]"
+							}
+						],
+						"internalType": "struct CurveConvexStratBase.Config",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "cvxPoolPID",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "cvxRewards",
+				"outputs": [
+					{
+						"internalType": "contract IConvexRewards",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "decimalsMultipliers",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256[3]",
+						"name": "amounts",
+						"type": "uint256[3]"
+					}
+				],
+				"name": "deposit",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "extraRewards",
+				"outputs": [
+					{
+						"internalType": "contract IConvexRewards",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "extraToken",
+				"outputs": [
+					{
+						"internalType": "contract IERC20Metadata",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "feeDistributor",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "managementFees",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "minDepositAmount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "pool",
+				"outputs": [
+					{
+						"internalType": "contract ICurvePool_Mk2",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "pool3",
+				"outputs": [
+					{
+						"internalType": "contract ICurvePool",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "pool3LP",
+				"outputs": [
+					{
+						"internalType": "contract IERC20Metadata",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "poolLP",
+				"outputs": [
+					{
+						"internalType": "contract IERC20Metadata",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "sellExtraToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "sellToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "DSFAddr",
+						"type": "address"
+					}
+				],
+				"name": "setDSF",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "token",
+				"outputs": [
+					{
+						"internalType": "contract IERC20Metadata",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalHoldings",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_minDepositAmount",
+						"type": "uint256"
+					}
+				],
+				"name": "updateMinDepositAmount",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "withdrawer",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "userRatioOfCrvLps",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256[3]",
+						"name": "tokenAmounts",
+						"type": "uint256[3]"
+					},
+					{
+						"internalType": "enum CurveConvexStratBase.WithdrawalType",
+						"name": "withdrawalType",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint128",
+						"name": "tokenIndex",
+						"type": "uint128"
+					}
+				],
+				"name": "withdraw",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdrawAll",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "contract IERC20Metadata",
+						"name": "_token",
+						"type": "address"
+					}
+				],
+				"name": "withdrawStuckToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"changeFeeDistributor(address)": {
+					"details": "governance can set feeDistributor address for distribute protocol fees",
+					"params": {
+						"_feeDistributor": "- address feeDistributor that be used for claim fees"
+					}
+				},
+				"claimManagementFees()": {
+					"details": "dev claim managementFees from strategy. when tx completed managementFees = 0"
+				},
+				"deposit(uint256[3])": {
+					"details": "Returns deposited amount in USD. If deposit failed return zero",
+					"params": {
+						"amounts": "- amounts in stablecoins that user deposit"
+					},
+					"returns": {
+						"_0": "Returns deposited amount in USD."
+					}
+				},
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"renounceOwnership()": {
+					"details": "disable renounceOwnership for safety"
+				},
+				"sellExtraToken()": {
+					"details": "sell extra reward token on strategy can be called by anyone"
+				},
+				"sellToken()": {
+					"details": "sell base token on strategy can be called by anyone"
+				},
+				"setDSF(address)": {
+					"details": "dev set DSF (main contract) address",
+					"params": {
+						"DSFAddr": "- address of main contract (DSF)"
+					}
+				},
+				"totalHoldings()": {
+					"details": "Returns total USD holdings in strategy. return amount is lpBalance x lpPrice + cvx x cvxPrice + _config.crv * crvPrice + extraToken * extraTokenPrice.",
+					"returns": {
+						"_0": "Returns total USD holdings in strategy"
+					}
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				},
+				"updateMinDepositAmount(uint256)": {
+					"details": "dev can update minDepositAmount but it can't be higher than 10000 (100%) If user send deposit tx and get deposit amount lower than minDepositAmount than deposit tx failed",
+					"params": {
+						"_minDepositAmount": "- amount which must be the minimum (%) after the deposit, min amount 1, max amount 10000"
+					}
+				},
+				"withdraw(address,uint256,uint256[3],uint8,uint128)": {
+					"details": "Returns true if withdraw success and false if fail. Withdraw failed when user removingCrvLps < requiredCrvLPs (wrong minAmounts)",
+					"params": {
+						"tokenAmounts": "-  array of amounts stablecoins that user want minimum receive",
+						"userRatioOfCrvLps": "- user's Ratio of DSFLP for withdraw",
+						"withdrawer": "- address of user that deposit funds"
+					},
+					"returns": {
+						"_0": "Returns true if withdraw success and false if fail."
+					}
+				},
+				"withdrawAll()": {
+					"details": "can be called by DSF contract. This function need for moveFunds between strategys."
+				},
+				"withdrawStuckToken(address)": {
+					"details": "governance can withdraw all stuck funds in emergency case",
+					"params": {
+						"_token": "- IERC20Metadata token that should be fully withdraw from Strategy"
+					}
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts_DSF/strategies/ConvexStratedgy_MIM_SPELL.sol": "ConvexStratedgy_MIM_SPELL"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/access/Ownable.sol": {
+			"keccak256": "0xa94b34880e3c1b0b931662cb1c09e5dfa6662f31cba80e07c5ee71cd135c9673",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://40fb1b5102468f783961d0af743f91b9980cf66b50d1d12009f6bb1869cea4d2",
+				"dweb:/ipfs/QmYqEbJML4jB1GHbzD4cUZDtJg5wVwNm3vDJq1GbyDus8y"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5a7d5b1ef5d8d5889ad2ed89d8619c09383b80b72ab226e0fe7bde1636481e34",
+				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
+			"keccak256": "0x8de418a5503946cabe331f35fe242d3201a73f67f77aaeb7110acb1f30423aca",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5a376d3dda2cb70536c0a45c208b29b34ac560c4cb4f513a42079f96ba47d2dd",
+				"dweb:/ipfs/QmZQg6gn1sUpM8wHzwNvSnihumUCAhxD119MpXeKp8B9s8"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/extensions/draft-IERC20Permit.sol": {
+			"keccak256": "0xf41ca991f30855bf80ffd11e9347856a517b977f0a6c2d52e6421a99b7840329",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b2717fd2bdac99daa960a6de500754ea1b932093c946388c381da48658234b95",
+				"dweb:/ipfs/QmP6QVMn6UeA3ByahyJbYQr5M6coHKBKsf3ySZSfbyA8R7"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol": {
+			"keccak256": "0x9b72f93be69ca894d8492c244259615c4a742afc8d63720dbc8bb81087d9b238",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f5a7b96e511be78d5cdf635c784e6ab8cdd38625bb8cafb8a80914a1c89cf0f6",
+				"dweb:/ipfs/QmVzTCwJxQAkjRQHboT5QrvsVJGWQHgfEjeTbvyxoKBrds"
+			]
+		},
+		"@openzeppelin/contracts/utils/Address.sol": {
+			"keccak256": "0xf96f969e24029d43d0df89e59d365f277021dac62b48e1c1e3ebe0acdd7f1ca1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ec772b45a624be516f1c81970caa8a2e144301e9d0921cbc1a2789fef39a1269",
+				"dweb:/ipfs/QmNyjwxCrGhQMyzLD93oUobJXVe9ceJvRvfXwbEtuxPiEj"
+			]
+		},
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92",
+				"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3"
+			]
+		},
+		"contracts_DSF/interfaces/IConvexBooster.sol": {
+			"keccak256": "0x9629e2caa3d6548b892ef29c69d72180e7a23fca150620de55ecdf7986ec665d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://19ab69bbb21875e81bba54d39aa63747c05a6f094fad3afc552b18cce1540a99",
+				"dweb:/ipfs/QmfCv1pSRvvBaqCEHmqGsU8sSz1wiqx6cSXoCBuW9wk5FE"
+			]
+		},
+		"contracts_DSF/interfaces/IConvexMinter.sol": {
+			"keccak256": "0x784779262ee1cafddaf8867a17b51ceed2f213cdb16f1220733e130d983d09c7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f2e85a7f2bcf7baa8dd46ca40c0dec1f9dafa623001d6b7c2555f0297ab6ea22",
+				"dweb:/ipfs/QmRrk9KxW3YsfGzg1m3JK7nUYMNm1qcHzB2oxeUVz1ap4a"
+			]
+		},
+		"contracts_DSF/interfaces/IConvexRewards.sol": {
+			"keccak256": "0xba9f01cf377002aa99ae1a85ed460c18688c54adfa19c45e3c88337ce8da8603",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7fec1d84cf704e9ae7adba5c626dcc0ce0a44067b75c48267b6004e18d881249",
+				"dweb:/ipfs/QmdKEnpW757ynL9DBSSVTyJL6HyZQNTTKbAyAmSSX5cMS4"
+			]
+		},
+		"contracts_DSF/interfaces/ICurvePool.sol": {
+			"keccak256": "0x942d05476c17b3d1d75174d6d68b38a637a4b9ca96e815a860eb6af24e97f449",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://24ee268e1b3ebc99eeacf726534960cb18c12a0c703e2254fa6a3a899523456d",
+				"dweb:/ipfs/Qmc5nULfbFfiLZS5gRfCnZ4B9Mi3pprAKhiGckHvgTKtxC"
+			]
+		},
+		"contracts_DSF/interfaces/ICurvePoolPricable.sol": {
+			"keccak256": "0x5187469693353e142367d5e819711c6edb7bcf1cfb9382c89dccf70d81e69140",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b9446d2620d97b9db69845d83d55dc1c7c443a8bad346985b86ef7f7273d5091",
+				"dweb:/ipfs/QmaH7mFhFJmyxAFcEiRZgcTkUWrk783HV5tG8gT35DY34R"
+			]
+		},
+		"contracts_DSF/interfaces/ICurvePool_Mk2.sol": {
+			"keccak256": "0xfcacc3a1ca63dbfc9584e1d68619bcd5f72cc556efd136077f453b9fbcfde0eb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://63c3ef1aac5362ac24ece374b3a7c66d8ea4059d057b35b25ef52accbc0c7da2",
+				"dweb:/ipfs/QmTBgWQfZd8dJrh8z6vTHkPtS13y4DbpreLDnxRZaBr8TC"
+			]
+		},
+		"contracts_DSF/interfaces/ICurvePool_Mk3.sol": {
+			"keccak256": "0x7bcaf5dd9887d4e379ad191e131f866e2f888f6713e0eca82672a5c80252bcb9",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e2ca7154d808e2c2f7963a5dc8aca61556e2cd2b3d74cd751ed36b46a2dabe74",
+				"dweb:/ipfs/QmUbEndhsZc5F4MakAVVw6wTgbR6zmVqPz8XP4oqi6ptBn"
+			]
+		},
+		"contracts_DSF/interfaces/IDSF.sol": {
+			"keccak256": "0xdfcc11819c9f9b28c1140ffde4767622c889420331a5599b380bb37842bf9ea9",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://285da0fb55ea70b14ffa78bcde451ade5f28f964a431c6bc2bfe4b5793c97aa7",
+				"dweb:/ipfs/QmQakYWGaMjHRCtH3yVTPZk1ZBaVw3iMXaLZC3uR1mx3mT"
+			]
+		},
+		"contracts_DSF/interfaces/IUniswapRouter.sol": {
+			"keccak256": "0x08a5edd0b320f2ccb89f7a45bc83b4d1fa7431305bdc6bae92a2ebc7272b9b66",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4c243e3d45d3e8538bad47eb17d19ab6072e42aec9aa1898138fe9f9ce807d29",
+				"dweb:/ipfs/QmUqGNEQYw2kN8SinC2cT15iHGDGHZcS1V2Ec1u5tyDsrX"
+			]
+		},
+		"contracts_DSF/strategies/ConvexStratedgy_MIM_SPELL.sol": {
+			"keccak256": "0xb5862ad9388e4802ea8e49b312ca687e6f997a4afedc927f8640d07c847e1c9c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://22b87aef6c390e0c5e804bfd37556fb3ab79b7eadf06090cf737699365b60888",
+				"dweb:/ipfs/QmZVV5XMHptHgvwkKeXtJCyeDPZ8NhSeVhMC4CTi5eMF4Q"
+			]
+		},
+		"contracts_DSF/strategies/CurveConvexExtraStratBase.sol": {
+			"keccak256": "0x23b14afe7764c12d96b5005ceb0bb76e0a3a0713dcd087e698f5cf4315860f1e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://238046982923dd551511b2c5dddd988fb98fe9555c3e9419faa51fdfb15e30f6",
+				"dweb:/ipfs/QmZKe17PKKYf3wGNupmLXu3vmUHtwD6cieL9PhssE2EFkb"
+			]
+		},
+		"contracts_DSF/strategies/CurveConvexStrat.sol": {
+			"keccak256": "0xd73c1ce552a074a3bbf1570e9730e101f670414afbd61db0dbf43deabea149c7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9f4f14d102b3570e2bff6e2c446d83e2738d2e13dbd4b2e97aed360257248bf1",
+				"dweb:/ipfs/QmS8KGXHxMzWukVis6GwYw7KZ5jzZKk1rToVwH9SrL7mRX"
+			]
+		},
+		"contracts_DSF/strategies/CurveConvexStratBase.sol": {
+			"keccak256": "0x368f622cc47ff4f1ebfa20f768a5f3693ee711d3fced5c36a747ba6c2884d61f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://04e30e96c713623eb6e99aeae396c6ee21a91027905f1a56fae4575d41a578f1",
+				"dweb:/ipfs/QmVCPjRR9puVZbetk1MR1GH9MAFJ5sAiWSHFs8vTxyjtZL"
+			]
+		},
+		"contracts_DSF/utils/Constants.sol": {
+			"keccak256": "0x83874989292efa29f603249618a4232c80c206b6bb22e432081c426347c92ff0",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b50f186db38dc3801c86442af04b1156358812de4cfe516cce2325976063e8e4",
+				"dweb:/ipfs/Qmarnu8Fj2NRxzCaMRpx5yYnqZ2bEDhSApeNCBMmnPsoaP"
+			]
+		}
+	},
+	"version": 1
+}

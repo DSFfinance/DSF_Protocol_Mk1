@@ -42,12 +42,6 @@ Discover the simplicity, efficiency, transparency, and security that DSF Finance
 👨‍💻Future events 
 We are diligently working on introducing additional products from DSF Finance in 2024:
 
-## Why DSF.Finance?
-
-- **Complexity:** DeFi products are challenging for newcomers.
-- **Lack of User-Friendly Interfaces:** Existing interfaces cater to developers, hindering DeFi accessibility.
-- - **Gasless Transactions:** Future Feature - DSF.Finance aims to simplify user interactions by introducing gasless transactions, providing a seamless experience for users without the need for gas fees.
-
 1. **DSF Loan:** A lending service collateralized with DSF Invest assets.
 2. **DSF DAO:** Participants in DSF DAO receive 40% of the profits generated from DSF Invest and DSF Loan.
 

@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.35;
 
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol';
@@ -79,7 +79,7 @@ abstract contract CurveConvexExtraStratBase is Context, CurveConvexStratBase {
 
         uint256 usdtBalanceBefore = _config.tokens[DSF_USDT_TOKEN_ID].balanceOf(address(this));
 
-        extraToken.safeApprove(address(_config.router), extraToken.balanceOf(address(this)));
+        extraToken.forceApprove(address(_config.router), extraToken.balanceOf(address(this)));
         _config.router.swapExactTokensForTokens(
             extraBalance,
             0,
